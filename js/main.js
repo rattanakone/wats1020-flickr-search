@@ -6,7 +6,7 @@
 //
 // Allow users to click the images to see a larger version with more information.
 $(document).on('ready', function(){	
-(function searchImages(tags) {
+function searchImages(tags) {
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
   $.getJSON( flickerAPI, { 
 	  tags: tags,
@@ -20,12 +20,11 @@ $(document).on('ready', function(){
       });
 	  $(".search-title").html(data.title);
     });
-})();
+}
 
-$('button.search').click(function(event){
+$('button.search').click(function(){
 	event.preventDefault();
-	var newSearch = $(event.target.parentElement).find('input[name="searchText"]')[0];
-	console.log(newSearch);
+	var newSearch = $(this.parentElement).find('input[name="searchText"]')[0];
 	searchImages(newSearch.value);
   });
 });
