@@ -9,6 +9,8 @@
 $(document).on('ready', function(){	
 function searchImages(tags) { // This function will handle the process of taking a user's search terms and sending them to Flickr for a response.
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"; // Define the location of the Flickr API
+	console.log(tags);
+    $('#images').innerHTML = '<li class="search-throbber">Searching...</li>';
   $.getJSON( flickerAPI, { // call where you send a request object including the tags the user submitted
 	  tags: tags,
       tagmode: "any",
