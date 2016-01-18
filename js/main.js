@@ -18,18 +18,19 @@ function searchImages(tags) { // This function will handle the process of taking
   }) 
     .done(function( data ) { //handler that displays 
 	  $('#images').empty(); // refreshes the content every time user searches for a new tag 
+		$('h1.search-title').first()[0].innerHTML = "Search for: " + tags;
       $.each( data.items, function( i, item ) {
-        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" ) // appends the displayed results into images container
-		  .wrap("<a href='" + item.link + "' target=\"_blank\"></a>"); // wrap the images and open up into new window when clicked on
-      });
-	  $(".search-title").html(data.title); // search title that displays the current tag of results
-		$.each( data.items, function( i, item ) {
         var newListItem = $("<li>")
         // If you're not doing the modal, then show info about the image.
         var newTitle = $('<p class="image-title">').html(item.title).appendTo(newListItem);
         var newDate = $('<p class="image-date">').text(item.date_taken).appendTo(newListItem);
         var newDescription = $('<p class="image-description">').html(item.description).appendTo(newListItem);
         var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" ) // appends the displayed results into images container
+		  .wrap("<a href='" + item.link + "' target=\"_blank\"></a>"); // wrap the images and open up into new window when clicked on
+      });
+	  $(".search-title").html(data.title); // search title that displays the current tag of results
     });
 }
 
