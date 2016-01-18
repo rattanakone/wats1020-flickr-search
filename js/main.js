@@ -8,6 +8,8 @@
 $(document).on('ready', function(){	
 (function searchImages(tags) {
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+	console.log(tags);
+  $('#images').innerHTML = '<li class="search-throbber">Searching...</li>';
   $.getJSON( flickerAPI, { 
 	  tags: tags,
       tagmode: "any",
@@ -19,6 +21,13 @@ $(document).on('ready', function(){
 		  .wrap("<a href='" + item.link + "' target=\"_blank\"></a>");
       });
 	  $(".search-title").html(data.title);
+		$.each( data.items, function( i, item ) {
+        var newListItem = $("<li>")
+        // If you're not doing the modal, then show info about the image.
+        var newTitle = $('<p class="image-title">').html(item.title).appendTo(newListItem);
+        var newDate = $('<p class="image-date">').text(item.date_taken).appendTo(newListItem);
+        var newDescription = $('<p class="image-description">').html(item.description).appendTo(newListItem);
+        var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);
     });
 })();
 
